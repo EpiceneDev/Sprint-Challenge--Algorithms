@@ -81,11 +81,13 @@ class SortingRobot:
         Turn on the robot's light
         """
         self._light = "ON"
+
     def set_light_off(self):
         """
         Turn off the robot's light
         """
         self._light = "OFF"
+
     def light_is_on(self):
         """
         Returns True if the robot's light is on and False otherwise.
@@ -93,43 +95,66 @@ class SortingRobot:
         return self._light == "ON"
 
     def sort(self):
+        # turn on light
+
         """
         Sort the robot's list.
-        """        
-        # Fill this out      
-
-        #while the robot is not at the end of the list
-        while self.can_move_right():
-
-            #the robot starts at position 0 so it should be able to swap an item and move right
+        """
+        # while robot is not at the end of the list, it can move right
+        while self.can_move_right:
+        # the robot should be able to swap an item and move right while not at end of list
             self.swap_item()
             self.move_right()
 
-            #if the item in front of the robot is greater than the item the robot is currently holding
+        # compare the held item to the next one
+        # if the held item's value is greater,  1.
+        # then swap, move left, swap, move right
             if self.compare_item() == 1:
-                self.swap_item() 
-                self.move_left() 
-                self.swap_item()                
+                self.swap_item()
+                self.move_left()
+                self.swap_item()
                 self.move_right()
-                
+
                 self.set_light_on()
-             #if the item in front of the robot is equal to the item the robot is currently holding
+
+        # If the held item's value is equal,  0.
+        # then move left, swap, move right
             elif self.compare_item() == 0:
                 self.move_left()
                 self.swap_item()
                 self.move_right()
-            #if the item in front of the robot is less than the item the robot is currently holding
+
+        # If the held item's value is less,  -1.
+        # move left, swap items and move right
             elif self.compare_item() == -1:
                 self.move_left()
                 self.swap_item()
                 self.move_right()
-       
+
+        # Sorting done?
         if self.light_is_on() == False:
+        # Yes - return the sorted list
             return self._list
         else:
-            
+        # turn off light
             self.set_light_off()
+
+        # No - keep calling sort (recursively)
+            # reset the robot to first item
             while self.can_move_left():
                 self.move_left()
             self.sort()
-        
+
+
+
+
+if __name__ == "__main__":
+    # Test our your implementation from the command line
+    # with `python robot_sort.py`
+
+    l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
+
+    robot = SortingRobot(l)
+
+    robot.sort()
+    print(robot._list)
