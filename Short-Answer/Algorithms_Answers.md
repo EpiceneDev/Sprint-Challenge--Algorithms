@@ -27,4 +27,31 @@ the last return statement is O(n) because as the inputs increase, the output als
 
 ## Exercise II
 
+Inputs:
+floors = n
+eggs = 100
+midway = f and the starting floor for breaking eggs
+broken = [f:] if f or higher
+unbroken = [:f] if f or lower
 
+Outputs:
+f = The floor where the eggs start to break and with the least amount of dropped eggs to find it.
+
+Using binary search principle:
+
+Go half way up the building and test the first egg.
+
+If the egg breaks, then divide the unbroken array (unbroken/2) and test another egg. 
+Else, if the egg doesn’t break, divide the broken array and test another egg. (broken/2)
+When the n = broken and n-1 = unbroken, f = n
+
+OR
+
+If the egg doesn’t break, go up a floor by one and toss egg. Repeat if egg doesn’t break.
+Then If egg does break, the floor is f
+
+If the egg does break, move down a floor and toss another egg.
+if the egg then does not break, give the previous floor as f
+
+The above code = O(logn).
+Because of the input in floors can increase dramatically but the algorithm is running less operations than the input increase.
