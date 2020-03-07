@@ -93,11 +93,27 @@ class SortingRobot:
         return self._light == "ON"
 
     def sort(self):
+        # turn on light
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # while robot is not at the end of the list, it can move right
+        # the robot should be able to swap an item and move right while not at end of list
+        # compare the held item to the next one
+        # if the held item's value is greater,  1.
+        # then swap, move left, swap, move right
+        # If the held item's value is less,  -1.
+        # move left, swap items and move right
+        # If the held item's value is equal,  0.
+        # then move left, swap, move right
+        # If either item is None,  None.
+
+        # Sorting done?
+        # Yes - return the sorted list
+        # turn off light
+        # No - keep calling sort (recursively)
+
+
 
 
 if __name__ == "__main__":
