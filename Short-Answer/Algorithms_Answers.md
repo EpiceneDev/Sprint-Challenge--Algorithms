@@ -42,7 +42,7 @@ Using binary search principle:
 Go half way up the building and test the first egg.
 
 If the egg breaks, then divide the unbroken array (unbroken/2) and test another egg. 
-Else, if the egg doesn’t break, divide the broken array and test another egg. (broken/2)
+Else, if the egg doesn’t break, divide the broken array and test another egg. (broken/2, binary method)
 When the n = broken and n-1 = unbroken, f = n
 
 OR
@@ -52,6 +52,11 @@ Then If egg does break, the floor is f
 
 If the egg does break, move down a floor and toss another egg.
 if the egg then does not break, give the previous floor as f
+(iterative)
+
+or
+
+keep f/2 until the egg is unbroken and then step back down each floor once the egg breaks. (recursive)
 
 The above code = O(logn).
 Because of the input in floors can increase dramatically but the algorithm is running less operations than the input increase.
