@@ -96,50 +96,65 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        #while the robot is not at the end of the list
-        while self.can_move_right():
 
-            # starting at zero the robot swaps None for something
-            #  and moves right
-            self.swap_item()
-            self.move_right()
+        self.swap_item()
+        self.set_light_on()
+        def sort_inner(self):
 
-            # item in front (to right) is greater than what the robot is holding
-            if self.compare_item() == 1:
+            if not self.can_move_right() and self.compare_item() == None and self.light_is_on():
                 self.swap_item()
-                self.move_left()
-                self.swap_item()
+                self.set_light_off()
+                return
+            while self.can_move_right():
                 self.move_right()
-                # turn on the light to indicate swap
-                self.set_light_on()
-
-            # if the item in front is equal to the item the robot is holding
-            elif self.compare_item() == 0:
+                if self.compare_item() != -1:
+                    self.swap_item()
+            while self.can_move_left() and self.compare_item() != None:
                 self.move_left()
-                self.swap_item()
-                self.move_right()
+                if self.compare_item() == None or self.compare_item() == 1:
+                    self.swap_item()
+            while self.light_is_on():
+                sort_inner(self)
+        sort_inner(self)
 
-            # item in front is less than what the robot is holding
-            elif self.compare_item() == -1:
-                self.move_left()
-                self.swap_item()
-                self.move_right()
+        # #while the robot is not at the end of the list
+        # while self.can_move_right():
 
-        # if the sort is done, light goes off and list returned
-        if self.light_is_on() == False:
-            return self._list
+        #     # robot picks up the first thing in the list
+        #     self.swap_item()
+        #     self.move_right()
 
-        # if can't move right, and sort is not done
-        else:
-            # turn off the light
-            self.set_light_off()
+        #     # item in front (to right) is greater than what the robot is holding
+        #     if self.compare_item() == 1:
+        #         self.swap_item()
+        #         self.move_left()
+        #         self.swap_item()
+        #         self.move_right()
 
-            # move the robot all the way back to the front of the list
-            while self.can_move_left():
-                self.move_left()
+        #         # turn on the light to indicate swap
+        #         self.set_light_on()
+
+        #     # if the item in front is less than or equal to the item the robot is holding
+        #     elif self.compare_item() <= 0:
+        #         self.move_left()
+        #         self.swap_item()
+        #         self.move_right()
+
+        # # if the sort is done, light goes off and list returned
+        # if self.light_is_on() == False:
+        #     return self._list
+
+        # # if can't move right, and sort is not done
+        # else:
+        #     # turn off the light
+        #     self.set_light_off()
+
+        #     # move the robot all the way back to the front of the list
+        #     while self.can_move_left():
+        #         self.move_left()
             
-            # start the sort again with this recursive call
-            self.sort()
+        #     # start the sort again with this recursive call
+        #     self.sort()
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
