@@ -32,3 +32,11 @@ c)  def bunnyEars(bunnies):
 O(1) + O(n)
 
 ## Exercise II
+
+go half way up and drop the egg # O(1)
+if it breaks, go halfway down the lower steps and drop again. # O(logn)
+repeat the above until it does not break
+if it does not break, move up one step until it does. O(1)
+Step where breakage starts = f
+Because it is an egg, i would expect it to break before the middle. So after dividing floors in half, I would step up or down instead of taking bigger slices.
+O(logn)
